@@ -127,5 +127,24 @@ namespace PotterShoppingCart.Tests.Tests
             //Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod()]
+        public void 第一集買了一本_第二三集各買了兩本_價格應為460()
+        {
+            //Arrange
+            var target = new HarryPotterCart();
+            books.Add(new Book { Serial = "HarryPotter", Episode = 1, price = 100 });
+            books.Add(new Book { Serial = "HarryPotter", Episode = 2, price = 100 });
+            books.Add(new Book { Serial = "HarryPotter", Episode = 2, price = 100 });
+            books.Add(new Book { Serial = "HarryPotter", Episode = 3, price = 100 });
+            books.Add(new Book { Serial = "HarryPotter", Episode = 3, price = 100 });
+            double expected = 460;
+
+            //Act
+            double actual = target.CountPrice(books);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
