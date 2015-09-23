@@ -1,0 +1,58 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using PotterShoppingCart.Tests;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+namespace PotterShoppingCart.Tests.Tests
+{
+
+    [TestClass()]
+    public class HarryPotterCartTests
+    {
+        private List<Book> books;
+
+        [TestInitialize()]
+        public void MyTestInit() {
+            books = new List<Book>();
+        }
+
+        
+        [TestCleanup()]
+        public void MyTestCleanUp()
+        {
+            books = null;
+        }
+
+        [TestMethod()]
+        public void 第一集買了一本_價格應100元()
+        {
+            //Arrange
+            var target = new HarryPotterCart();
+            books.Add(new Book { Serial = "HarryPotter", Episode= 1, price=100 });
+            double expected = 100;
+
+            //Act
+            double actual = target.CountPrice(books);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void 第一集買了一本，第二集也買了一本，價格應為190()
+        {
+            //Arrange
+            var target = new HarryPotterCart();
+            books.Add(new Book { Serial = "HarryPotter", Episode = 1, price = 100 });
+            double expected = 100;
+
+            //Act
+            double actual = target.CountPrice(books);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+    }
+}
