@@ -14,12 +14,12 @@ namespace PotterShoppingCart.Tests
             List<double> discounts = new List<double> { 1, 1, 0.95, 0.9, 0.8, 0.75 };
 
             var source = books.Where(book => book.Serial == _serial).GroupBy(book => book.Episode).ToList();
-            var counts = source.Select(item => item.Count()).OrderBy(item => item).ToList();
+            var counts = source.Select(item => item.Count()).Distinct().OrderBy(item => item).ToList();
 
             var prevCount = 0;
             counts.ForEach(c => {
                 var discount = discounts[source.Count(b => b.Count() >= c)];
-                result += source.Where(bs => bs.Count() >= c).Sum(bs => bs.Sum(b => b.price * discount * (c - prevCount)));
+                result += source.Where(bs => bs.Count() >= c).Sum(bs => bs.ToList()[0].price * discount * (c - prevCount));
                 prevCount = c;
             });
 
